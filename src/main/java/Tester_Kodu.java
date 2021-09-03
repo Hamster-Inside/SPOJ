@@ -3,16 +3,16 @@ import java.util.Scanner;
 class Tester_Kodu {
     public static void main(String[] args) {
 
-        int[] tableA = new int[20];
-        int[] tableB = new int[20];
-
-    tableA[0] = 5;
-    tableA[1] = 10;
-        System.out.println("table a length = " + tableA.length);
-    for (int a: tableA){
-        System.out.println(a);
-    }
-
-    }
+    String a1 = "tekst";
+    String a2 = "tekst";
+    String a3 = "te";
+    String a4 = "kst";
+    String a5 = a3+a4;
+        System.out.println(a5);
+        System.out.println(a1.compareTo(a4));
+        var x = 5;
+        var y = "5";
+       // if (x == y) System.out.println("wow");
+           }
 
 }
