@@ -39,6 +39,7 @@ public class Sort1 {
                 index++;
                 howManyInside[i] = index;
             }
+
             scanner.nextLine();
         }
         for (int k = 0; k < t; k++) {
