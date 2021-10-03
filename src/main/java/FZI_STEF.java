@@ -4,8 +4,8 @@ public class FZI_STEF {
     public static void main(String[] args) {
         int cities;
         int plusNumber = 0;
-        int highestNum = 0;
-        int sum = 0;
+        long highestNum = 0;
+        long sum = 0;
         Scanner scanner = new Scanner(System.in);
         cities = scanner.nextInt();
         int[] money = new int[cities];
