@@ -21,12 +21,17 @@ public class MWPZ06D {
                 System.out.println("TAK");
                 continue;
             }
-            if (liczbaOsob == 1 && liczbaCukierkow > 1) {
+            if (liczbaOsob == 1 && liczbaCukierkow >= 1) {
                 System.out.println("TAK");
                 continue;
             }
-            int podzielnik = liczbaOsob / liczbaCukierkow;
-            if ((liczbaCukierkow * podzielnik + 1) < liczbaOsob) System.out.println("TAK");
+            if (liczbaOsob == 2 && liczbaCukierkow > 0) {
+                System.out.println("NIE");
+                continue;
+            }
+            liczbaOsob--;
+            int reszta =  liczbaCukierkow % liczbaOsob;
+            if (reszta != 0) System.out.println("TAK");
             else System.out.println("NIE");
         }
     }
