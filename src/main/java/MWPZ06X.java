@@ -9,7 +9,7 @@ public class MWPZ06X {
         scanner.nextLine();
         for (int i = 0; i < liczbaZestawowDanych; i++) {
             kroki = scanner.nextInt();
-            System.out.println(Math.pow(kroki,2));
+            System.out.println(kroki*kroki);
         }
     }
 }
