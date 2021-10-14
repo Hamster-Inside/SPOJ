@@ -10,7 +10,7 @@ public class KC008 {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()){
            line = scanner.nextLine();
-        
+
             for (int i =0; i< line.length(); i++){
                 if (line.charAt(i) != ' '){
                     num+=line.charAt(i);
