@@ -61,19 +61,21 @@ public class SUDOKUC {
         boolean failed = false;
         Scanner scanner = new Scanner(System.in);
         tests = scanner.nextInt();
+        scanner.nextLine();
         for (int i = 0; i < tests; i++) {
             for (int j = 0; j < 9; j++) {
                 for (int k = 0; k < 9; k++) {
                     nums[j][k] = scanner.nextInt();
                     if (nums[j][k] > 9 || nums[j][k] < 1) {
                         failed = true;
-                        break;
+
                     }
                 }
-                if (failed) break;
+
 
 
             }
+
             if (!failed) {
                 for (int j = 0; j < 9; j++) {
                     failed = checkRow(nums, j);
