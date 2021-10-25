@@ -5,6 +5,7 @@ public class CHSTAMPS {
         String n; // 1 - 10 ^ 15
         int k; // 1 - 15
         int fiveCounter = 0;
+        int number;
 
         // wypisać liczbę większą od 'n' zawierającą co najmniej 'k' piątek
         // 1000 2 --> 1055
@@ -22,16 +23,18 @@ public class CHSTAMPS {
             if (n.charAt(i) == '5') fiveCounter++;
         }
         if (fiveCounter > k) {
+
+
             for (int i = n.length()-1; i>0; i--){
+                // dla liczb typu 32324553599999
                if (n.charAt(i) == '9'){
                    continue;
                }
+               // jak mniejsza od 9 to powiększyć
                else if (n.charAt(i) < 9 && i !=n.length()-1){
                 for (int j = n.length();j>i;j--){
                     charTable[j] = '0';
-
                 }
-
                }
             }
         }
