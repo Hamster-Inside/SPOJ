@@ -115,6 +115,34 @@ public class CHSTAMPSTest {
         CHSTAMPS.main(new String[0]);
         assertEquals("56", getOutput().trim());
     }
+    @Test
+    public void mainTest12() {
+        final String testString = "5 1";
+        provideInput(testString);
+        CHSTAMPS.main(new String[0]);
+        assertEquals("15", getOutput().trim());
+    }
+    @Test
+    public void mainTest13() {
+        final String testString = "15 1";
+        provideInput(testString);
+        CHSTAMPS.main(new String[0]);
+        assertEquals("25", getOutput().trim());
+    }
+    @Test
+    public void mainTest14() {
+        final String testString = "51 1";
+        provideInput(testString);
+        CHSTAMPS.main(new String[0]);
+        assertEquals("52", getOutput().trim());
+    }
+    @Test
+    public void mainTest15() {
+        final String testString = "6666 4";
+        provideInput(testString);
+        CHSTAMPS.main(new String[0]);
+        assertEquals("15555", getOutput().trim());
+    }
     }
 
 
