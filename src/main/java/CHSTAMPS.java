@@ -38,6 +38,11 @@ public class CHSTAMPS {
                 for (int i = charTable.length - 1; i >= 0; i--) {
                     // dla liczb typu 32324553599999
                     if (charTable[i] == '5') { //TODO - NIE DZIAŁA DLA 55
+                        if (fiveCounter > k) {
+                            charTable[i] = '6';
+                            fiveCounter--;
+                            break;
+                        }
                         if (!haveToAddNow) continue;
                         else {
                             charTable[i] = '6';

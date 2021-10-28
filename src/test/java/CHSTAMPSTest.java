@@ -113,7 +113,7 @@ public class CHSTAMPSTest {
         final String testString = "55 1";
         provideInput(testString);
         CHSTAMPS.main(new String[0]);
-        assertEquals("65", getOutput().trim());
+        assertEquals("56", getOutput().trim());
     }
     }
 
