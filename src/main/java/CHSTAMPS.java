@@ -3,17 +3,8 @@ import java.util.Scanner;
 public class CHSTAMPS {
     public static void main(String[] args) {
         String n; // 1 - 10 ^ 15
-        String output = "";
+        String output;
         int k; // 1 - 15
-
-
-        // wypisać liczbę większą od 'n' zawierającą co najmniej 'k' piątek
-        // 1000 2 --> 1055
-        // 1000 3 --> 1555
-        // 10000 3 --> 10555
-        // 23211 2 --> 23255
-        // 595 2 --> 655
-        // 150325 2 --> 150335
 
         // warunek 1 -> jeśli liczba ma mniej lub tyle cyfr co (k) to stworzyć liczbę składającą się z samych 5 w wymaganej liczbie "k"
         // warunek 2 -> jeśli liczba ma więcej cyfr niż wymaga tego k
@@ -72,6 +63,7 @@ public class CHSTAMPS {
         while (fiveCounter < howManyFivesYouWant) {
             // dodajemy 5 do jedności, potem dziesiątek itd. Gdy trafiamy na "9" to zmieniamy na 0 i zwiększamy lewą stronę o 1 jeśli jest mniejsza od 9
             for (int i = charTable.length - 1; i >= 0; i--) {
+
                 if (i != 0) {
                     if (charTable[i] == '5') {
                         if (haveToAddNow) {
@@ -82,16 +74,13 @@ public class CHSTAMPS {
                     } else if (charTable[i] == '9') {
                         charTable[i] = '0';
                         haveToAddNow = true;
+                    } else if (charTable[i] == '0' || charTable[i] == '1' || charTable[i] == '2' || charTable[i] == '3' || charTable[i] == '4') {
+                        charTable[i] = '5';
+                        fiveCounter++;
+                        break;
                     } else {
-                        if (haveToAddNow){
-                            charTable[i] += 1;
-                            if (charTable[i] == '5') fiveCounter++;
-                        }
-                        else {
-                            charTable[i] = '5';
-                            fiveCounter++;
-                        }
-
+                        charTable[i] += 1;
+                        if (charTable[i] == '5') fiveCounter++;
                         haveToAddNow = false;
                         break;
                     }
@@ -99,9 +88,10 @@ public class CHSTAMPS {
                     if (haveToAddNow && charTable[i] == '9') {
                         charTable[i] = '0';
                         haveToAddOne = true;
-                    }
-                    else {
-                        charTable[i]+=1;
+                    } else {
+                        if (charTable[i] == '5') fiveCounter--;
+                        charTable[i] += 1;
+                        if (charTable[i] == '5') fiveCounter++;
                     }
                 }
             }
