@@ -85,10 +85,12 @@ public class CHSTAMPS {
                         break;
                     }
                 } else {
-                    if (haveToAddNow && charTable[i] == '9') {
+                    if (charTable[i] == '9') {
                         charTable[i] = '0';
                         haveToAddOne = true;
-                    } else {
+                    }
+
+                            else {
                         if (charTable[i] == '5') fiveCounter--;
                         charTable[i] += 1;
                         if (charTable[i] == '5') fiveCounter++;
