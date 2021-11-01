@@ -2,10 +2,9 @@ import java.util.Scanner;
 
 public class BAJTELEK {
     public static void main(String[] args) {
-        // wzór Picka -> P = W + 1/2 B -1
-        // gdzie P - pole; W - liczba pkt kratowych wewnątrz wielokąta; B - liczba pkt na brzegu wielokąta
+
         int numberOfDrawings, lowestX, highestX, lowestY, highestY;
-        int numOfBlackPoints, numOfGrayPoints, numOfPointsInsideBlack, numOfPointsInsideGray;
+        int numOfBlackPoints, numOfGrayPoints, numOfPointsInsideBlack, numOfPointsInsideGray, areaOfBlack, areaOfGray;
 
         String inputPoints;
 
@@ -31,22 +30,54 @@ public class BAJTELEK {
             lowestY = findLowestY(grayPointsTable);
             highestY = findHighestY(grayPointsTable);
             numOfPointsInsideGray = pointsInside(grayPointsTable, lowestX, highestX, lowestY, highestY);
-
+            areaOfBlack = countArea(numOfPointsInsideBlack, numOfBlackPoints);
+            areaOfGray = countArea(numOfPointsInsideGray, numOfGrayPoints);
+            for (int k: blackPointsTable){
+                System.out.print(k + " ");
+            }
+            System.out.println();
+            for (int k: grayPointsTable){
+                System.out.print(k + " ");
+            }
+            System.out.println();
+            System.out.println(areaOfGray-areaOfBlack);
         }
 
+    }
+
+    static int countArea(int pointsInside, int numOfPointsAround) {
+        // wzór Picka -> P = W + 1/2 B -1
+        // gdzie P-pole; W-liczba pkt kratowych wewnątrz wielokąta; B-liczba pkt na brzegu wielokąta
+        int area;
+        area = pointsInside + (numOfPointsAround / 2) - 1;
+        return area;
     }
 
     static int pointsInside(int[] pointsTable, int lowestX, int highestX, int lowestY, int highestY) {
         int counter = 0;
+        int posStart = 0;
+        int posEnd = 0;
+        boolean checkIfIsStartLine;
+        int xPoints = pointsTable.length/4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
+        int yPoints = highestY-lowestY-1;
+        double[][] startPointsTable = new double [yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
+        double[][] endPointsTable = new double [yPoints][xPoints];
+        int[] pointsAtY = new int[yPoints];
+
+        for (int i = 0; i< (pointsTable.length/2)-1; i+=2){
+
+        }
 
 
         for (int i = lowestY; i < highestY; i++) {
-            for (int j = lowestX; j<highestX; j++){
+            for (int j = lowestX; j < highestX; j++) {
 
             }
         }
-        return 0;
+        return counter;
     }
+
+
 
     static int findLowestX(int[] tableOfNums) {
         int lowestNum = tableOfNums[0];
