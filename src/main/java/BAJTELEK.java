@@ -32,15 +32,15 @@ public class BAJTELEK {
             numOfPointsInsideGray = pointsInside(grayPointsTable, lowestX, highestX, lowestY, highestY);
             areaOfBlack = countArea(numOfPointsInsideBlack, numOfBlackPoints);
             areaOfGray = countArea(numOfPointsInsideGray, numOfGrayPoints);
-            for (int k: blackPointsTable){
+            for (int k : blackPointsTable) {
                 System.out.print(k + " ");
             }
             System.out.println();
-            for (int k: grayPointsTable){
+            for (int k : grayPointsTable) {
                 System.out.print(k + " ");
             }
             System.out.println();
-            System.out.println(areaOfGray-areaOfBlack);
+            System.out.println(areaOfGray - areaOfBlack);
         }
 
     }
@@ -58,15 +58,25 @@ public class BAJTELEK {
         int posStart = 0;
         int posEnd = 0;
         boolean checkIfIsStartLine;
-        int xPoints = pointsTable.length/4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
-        int yPoints = highestY-lowestY-1;
-        double[][] startPointsTable = new double [yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
-        double[][] endPointsTable = new double [yPoints][xPoints];
+        int xPoints = pointsTable.length / 4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
+        int yPoints = highestY - lowestY - 1;
+        double[][] startPointsTable = new double[yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
+        double[][] endPointsTable = new double[yPoints][xPoints];
         int[] pointsAtY = new int[yPoints];
 
-        for (int i = 0; i< (pointsTable.length/2)-1; i+=2){
+
+        // 2 1 3 2 4 9 2 1
+        // x0>x1 oraz y0>y1 -> start, x0>x1 y0<y1 -> end, x0<x1 y0>y1 -> start, x0<x1 y0<y1 -> end
+        // sprawdzanie czy linia jest poczatkowa czy koncowa i dodanie do odpowiedniej listy
+        for (int i = 0; i < (pointsTable.length / 2) - 1; i++) {
+            if (pointsTable[i] > pointsTable[i + 2]) {
+                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
+            } else if (pointsTable[i] < pointsTable[i + 2]) {
+                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
+            }
 
         }
+
 
 
         for (int i = lowestY; i < highestY; i++) {
@@ -76,7 +86,6 @@ public class BAJTELEK {
         }
         return counter;
     }
-
 
 
     static int findLowestX(int[] tableOfNums) {
