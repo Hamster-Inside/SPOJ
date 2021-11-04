@@ -57,7 +57,7 @@ public class BAJTELEK {
         int counter = 0;
         int posStart = 0;
         int posEnd = 0;
-        boolean checkIfIsStartLine;
+        boolean checkIfIsStartLine, goingRight, goingLeft, isHorizontal, isVertical;
         int xPoints = pointsTable.length/4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
         int yPoints = highestY-lowestY-1;
         double[][] startPointsTable = new double [yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
