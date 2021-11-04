@@ -64,8 +64,23 @@ public class BAJTELEK {
         double[][] endPointsTable = new double [yPoints][xPoints];
         int[] pointsAtY = new int[yPoints];
 
-        for (int i = 0; i< (pointsTable.length/2)-1; i+=2){
+        // 2 1 3 2 4 9 2 1
+        // x0>x1 oraz y0>y1 -> start, x0>x1 y0<y1 -> end, x0<x1 y0>y1 -> start, x0<x1 y0<y1 -> end
+        // sprawdzanie czy linia jest poczatkowa czy koncowa i dodanie do odpowiedniej listy
+        for (int i = 0; i < (pointsTable.length / 2) - 1; i += 2) {
+            if (pointsTable[i + 1] == pointsTable[i + 3]) {
+                if (pointsTable[i] < pointsTable[i + 2]) { // jeżeli linia jest pozioma to punkt z lewej jest końcowym a punkt z prawej początkiem dalszego sprawdzania //TODO
+                    endPointsTable[pointsTable[i + 1]][posStart] = pointsTable[i];
+                    startPointsTable[pointsTable[i + 1]][posEnd] = pointsTable[i + 2];
+                }
 
+            } else if (pointsTable[i] == pointsTable[i + 2])
+                checkIfIsStartLine = pointsTable[i + 1] < pointsTable[i + 3];
+            else if (pointsTable[i] > pointsTable[i + 2]) {
+                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
+            } else if (pointsTable[i] < pointsTable[i + 2]) {
+                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
+            }
         }
 
 
