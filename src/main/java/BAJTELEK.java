@@ -57,30 +57,24 @@ public class BAJTELEK {
         int counter = 0;
         int posStart = 0;
         int posEnd = 0;
+        int numberOfLines = pointsTable.length/2;
         boolean checkIfIsStartLine, goingRight, goingLeft, isHorizontal, isVertical;
         int xPoints = pointsTable.length/4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
         int yPoints = highestY-lowestY-1;
         double[][] startPointsTable = new double [yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
         double[][] endPointsTable = new double [yPoints][xPoints];
         int[] pointsAtY = new int[yPoints];
+        int [] pointXAtLine = new int [numberOfLines];
+        int [] pointYAtLine = new int [numberOfLines];
+        for (int i = 0; i <pointsTable.length; i+=2) pointXAtLine[i] = pointsTable[i];
+        for (int i = 1; i <pointsTable.length; i+=2) pointYAtLine[i] = pointsTable[i];
 
         // 2 1 3 2 4 9 2 1
         // x0>x1 oraz y0>y1 -> start, x0>x1 y0<y1 -> end, x0<x1 y0>y1 -> start, x0<x1 y0<y1 -> end
         // sprawdzanie czy linia jest poczatkowa czy koncowa i dodanie do odpowiedniej listy
-        for (int i = 0; i < (pointsTable.length / 2) - 1; i += 2) {
-            if (pointsTable[i + 1] == pointsTable[i + 3]) {
-                if (pointsTable[i] < pointsTable[i + 2]) { // jeżeli linia jest pozioma to punkt z lewej jest końcowym a punkt z prawej początkiem dalszego sprawdzania //TODO
-                    endPointsTable[pointsTable[i + 1]][posStart] = pointsTable[i];
-                    startPointsTable[pointsTable[i + 1]][posEnd] = pointsTable[i + 2];
-                }
+        // jeżeli jest pozioma to sprawdzenie linii przed i za. W zaleznosci od kierunku ruchu będzie to linia otwierajaca albo zamykajaca zliczanie kropek srodkowych
+        for (int i = 0; i<numberOfLines; i++){
 
-            } else if (pointsTable[i] == pointsTable[i + 2])
-                checkIfIsStartLine = pointsTable[i + 1] < pointsTable[i + 3];
-            else if (pointsTable[i] > pointsTable[i + 2]) {
-                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
-            } else if (pointsTable[i] < pointsTable[i + 2]) {
-                checkIfIsStartLine = pointsTable[i + 1] > pointsTable[i + 3];
-            }
         }
 
 
