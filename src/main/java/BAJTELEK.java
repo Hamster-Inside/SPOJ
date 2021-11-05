@@ -32,15 +32,15 @@ public class BAJTELEK {
             numOfPointsInsideGray = pointsInside(grayPointsTable, lowestX, highestX, lowestY, highestY);
             areaOfBlack = countArea(numOfPointsInsideBlack, numOfBlackPoints);
             areaOfGray = countArea(numOfPointsInsideGray, numOfGrayPoints);
-            for (int k: blackPointsTable){
+            for (int k : blackPointsTable) {
                 System.out.print(k + " ");
             }
             System.out.println();
-            for (int k: grayPointsTable){
+            for (int k : grayPointsTable) {
                 System.out.print(k + " ");
             }
             System.out.println();
-            System.out.println(areaOfGray-areaOfBlack);
+            System.out.println(areaOfGray - areaOfBlack);
         }
 
     }
@@ -53,97 +53,114 @@ public class BAJTELEK {
         return area;
     }
 
+    public enum LineTravelDirection {
+        GOING_RIGHT, GOING_LEFT, IS_HORIZONTAL, IS_VERTICAL;
+    }
+
     static int pointsInside(int[] pointsTable, int lowestX, int highestX, int lowestY, int highestY) {
+        LineTravelDirection travelDirection;
         int counter = 0;
-        int posStart = 0;
-        int posEnd = 0;
-        int numberOfLines = pointsTable.length/2;
-        boolean checkIfIsStartLine, goingRight, goingLeft, isHorizontal, isVertical;
-        int xPoints = pointsTable.length/4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
-        int yPoints = highestY-lowestY-1;
-        double[][] startPointsTable = new double [yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
-        double[][] endPointsTable = new double [yPoints][xPoints];
+        int lineNo = 0;
+        int pointNo = 0;
+        int numberOfLines = pointsTable.length / 2;
+        boolean checkIfIsStartLine;
+        int xPoints = pointsTable.length / 4; // Maksymalnie będzie połowa punktów dla start i dla end. Później sprawdzenie czy linia jest startem, czy endem
+        int yPoints = highestY - lowestY - 1;
+        double[][] startPointsTable = new double[yPoints][xPoints]; // Jeśli punkty są od 0-5 na osi Y to potrzebne nam jest badanie tylko 1-4
+        double[][] endPointsTable = new double[yPoints][xPoints];
         int[] pointsAtY = new int[yPoints];
-        int [] pointXAtLine = new int [numberOfLines];
-        int [] pointYAtLine = new int [numberOfLines];
-        for (int i = 0; i <pointsTable.length; i+=2) pointXAtLine[i] = pointsTable[i];
-        for (int i = 1; i <pointsTable.length; i+=2) pointYAtLine[i] = pointsTable[i];
+        int[][] lineNumberPointNumberX = new int[numberOfLines][2]; // [0][0] pierwsza linia pierwszy pkt [0][1] pierwsza linia drugi pkt (...) 10 11 20 21 itd.
+        int[][] lineNumberPointNumberY = new int[numberOfLines][2];
+        for (int i = 0; i < pointsTable.length; i += 2) {
+            lineNumberPointNumberX[lineNo][pointNo] = pointsTable[i];
+            lineNumberPointNumberY[lineNo][pointNo] = pointsTable[i + 1];
+
+            lineNo++;
+            pointNo++;
+            if (pointNo == 2) pointNo = 0;
+        }
+
 
         // 2 1 3 2 4 9 2 1
         // x0>x1 oraz y0>y1 -> start, x0>x1 y0<y1 -> end, x0<x1 y0>y1 -> start, x0<x1 y0<y1 -> end
         // sprawdzanie czy linia jest poczatkowa czy koncowa i dodanie do odpowiedniej listy
         // jeżeli jest pozioma to sprawdzenie linii przed i za. W zaleznosci od kierunku ruchu będzie to linia otwierajaca albo zamykajaca zliczanie kropek srodkowych
-        for (int i = 0; i<numberOfLines; i++){
-
-        }
-
-
-        for (int i = lowestY; i < highestY; i++) {
-            for (int j = lowestX; j < highestX; j++) {
+        for (int i = 0; i < numberOfLines; i++) {
+            if (lineNumberPointNumberX[i][0] < lineNumberPointNumberX[i][1]) {
+                if (lineNumberPointNumberY[i][0] < lineNumberPointNumberY[i][1]){
+                    
+                }
+            } else if (lineNumberPointNumberX[i][0] > lineNumberPointNumberX[i][1]) {
+            } else if (lineNumberPointNumberX[i][0] == lineNumberPointNumberX[i][1]) {
 
             }
-        }
-        return counter;
-    }
 
 
+            for (int i = lowestY; i < highestY; i++) {
+                for (int j = lowestX; j < highestX; j++) {
 
-    static int findLowestX(int[] tableOfNums) {
-        int lowestNum = tableOfNums[0];
-        for (int i = 0; i < tableOfNums.length; i += 2) {
-            if (tableOfNums[i] < lowestNum) lowestNum = tableOfNums[i];
-        }
-        return lowestNum;
-    }
-
-    static int findHighestX(int[] tableOfNums) {
-        int highestNum = tableOfNums[0];
-        for (int i = 0; i < tableOfNums.length; i += 2) {
-            if (tableOfNums[i] > highestNum) highestNum = tableOfNums[i];
-        }
-        return highestNum;
-    }
-
-    static int findLowestY(int[] tableOfNums) {
-        int lowestNum = tableOfNums[1];
-        for (int i = 1; i < tableOfNums.length; i += 2) {
-            if (tableOfNums[i] < lowestNum) lowestNum = tableOfNums[i];
-        }
-        return lowestNum;
-    }
-
-    static int findHighestY(int[] tableOfNums) {
-        int highestNum = tableOfNums[1];
-        for (int i = 1; i < tableOfNums.length; i += 2) {
-            if (tableOfNums[i] > highestNum) highestNum = tableOfNums[i];
-        }
-        return highestNum;
-    }
-
-    static int[] pointsTable(String inputNums) {
-        String incomingNumber = "";
-        int xyPoints;
-        int positionInTable = 0;
-        int counter = 0;
-        boolean switchXY = true;
-        for (int i = 0; i < inputNums.length(); i++) {
-            if (inputNums.charAt(i) == ' ') counter++;
-        }
-        xyPoints = counter + 1;
-        int[] points = new int[xyPoints];
-        for (int j = 0; j < inputNums.length(); j++) {
-            if (inputNums.charAt(j) != ' ') {
-                incomingNumber += inputNums.charAt(j);
-            } else {
-                points[positionInTable] = Integer.parseInt(incomingNumber);
-                incomingNumber = "";
-                positionInTable++;
+                }
             }
-            if (j == inputNums.length() - 1) {
-                points[positionInTable] = Integer.parseInt(incomingNumber);
-                incomingNumber = "";
-            }
+            return counter;
         }
-        return points;
+
+
+        static int findLowestX ( int[] tableOfNums){
+            int lowestNum = tableOfNums[0];
+            for (int i = 0; i < tableOfNums.length; i += 2) {
+                if (tableOfNums[i] < lowestNum) lowestNum = tableOfNums[i];
+            }
+            return lowestNum;
+        }
+
+        static int findHighestX ( int[] tableOfNums){
+            int highestNum = tableOfNums[0];
+            for (int i = 0; i < tableOfNums.length; i += 2) {
+                if (tableOfNums[i] > highestNum) highestNum = tableOfNums[i];
+            }
+            return highestNum;
+        }
+
+        static int findLowestY ( int[] tableOfNums){
+            int lowestNum = tableOfNums[1];
+            for (int i = 1; i < tableOfNums.length; i += 2) {
+                if (tableOfNums[i] < lowestNum) lowestNum = tableOfNums[i];
+            }
+            return lowestNum;
+        }
+
+        static int findHighestY ( int[] tableOfNums){
+            int highestNum = tableOfNums[1];
+            for (int i = 1; i < tableOfNums.length; i += 2) {
+                if (tableOfNums[i] > highestNum) highestNum = tableOfNums[i];
+            }
+            return highestNum;
+        }
+
+        static int[] pointsTable (String inputNums){
+            String incomingNumber = "";
+            int xyPoints;
+            int positionInTable = 0;
+            int counter = 0;
+            boolean switchXY = true;
+            for (int i = 0; i < inputNums.length(); i++) {
+                if (inputNums.charAt(i) == ' ') counter++;
+            }
+            xyPoints = counter + 1;
+            int[] points = new int[xyPoints];
+            for (int j = 0; j < inputNums.length(); j++) {
+                if (inputNums.charAt(j) != ' ') {
+                    incomingNumber += inputNums.charAt(j);
+                } else {
+                    points[positionInTable] = Integer.parseInt(incomingNumber);
+                    incomingNumber = "";
+                    positionInTable++;
+                }
+                if (j == inputNums.length() - 1) {
+                    points[positionInTable] = Integer.parseInt(incomingNumber);
+                    incomingNumber = "";
+                }
+            }
+            return points;
+        }
     }
-}
