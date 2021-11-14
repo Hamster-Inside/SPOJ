@@ -15,50 +15,50 @@ public class BAJTELEK {
         long resultArea;
         double areaOfBlack, areaOfGray, resultCountAreaOfGray, resultCountAreaOfBlack;
 
-        String inputPoints,emptyLine;
+        String inputPoints, emptyLine;
 
         Scanner scanner = new Scanner(System.in);
 
         numberOfDrawings = scanner.nextInt();
         scanner.nextLine();
 
-    for (int i = 0; i < numberOfDrawings; i++) {
-        while (true){
-            emptyLine = scanner.nextLine();
-           if (!emptyLine.equals("")) break;
-        }
-        inputPoints = emptyLine;
-        int[] blackPointsTable = pointsTable(inputPoints);
-        inputPoints = scanner.nextLine();
-        int[] grayPointsTable = pointsTable(inputPoints);
+        for (int i = 0; i < numberOfDrawings; i++) {
+            while (true) {
+                emptyLine = scanner.nextLine();
+                if (!emptyLine.equals("")) break;
+            }
+            inputPoints = emptyLine;
+            int[] blackPointsTable = pointsTable(inputPoints);
+            inputPoints = scanner.nextLine();
+            int[] grayPointsTable = pointsTable(inputPoints);
 
 // TODO liczenie punktów na liniach a nie tylko skrajne
 
-        lowestX = findLowestX(blackPointsTable);
-        lowestY = findLowestY(blackPointsTable);
-        pushToTopRightPartOfCoordinateSystem(blackPointsTable, lowestX, lowestY);
-        highestX = findHighestX(blackPointsTable);
-        highestY = findHighestY(blackPointsTable);
-        checkingBlack = true;
-        numOfPointsInsideBlack = pointsInside(blackPointsTable, 0, highestX, 0, highestY);
-        checkingBlack = false;
+            lowestX = findLowestX(blackPointsTable);
+            lowestY = findLowestY(blackPointsTable);
+            pushToTopRightPartOfCoordinateSystem(blackPointsTable, lowestX, lowestY);
+            highestX = findHighestX(blackPointsTable);
+            highestY = findHighestY(blackPointsTable);
+            checkingBlack = true;
+            numOfPointsInsideBlack = pointsInside(blackPointsTable, 0, highestX, 0, highestY);
+            checkingBlack = false;
 
-        lowestX = findLowestX(grayPointsTable);
-        lowestY = findLowestY(grayPointsTable);
-        pushToTopRightPartOfCoordinateSystem(grayPointsTable, lowestX, lowestY);
-        highestX = findHighestX(grayPointsTable);
-        highestY = findHighestY(grayPointsTable);
-        checkingGray = true;
-        numOfPointsInsideGray = pointsInside(grayPointsTable, 0, highestX, 0, highestY);
-        checkingGray = false;
-        numOfBlackPoints = (blackPointsTable.length / 2) - 1;
-        numOfGrayPoints = (grayPointsTable.length / 2) - 1;
-        numOfBlackPoints += toAddBlackFromLines;
-        numOfGrayPoints += toAddGrayFromLines;
-        areaOfBlack = countArea(numOfPointsInsideBlack, numOfBlackPoints);
-        areaOfGray = countArea(numOfPointsInsideGray, numOfGrayPoints);
-        resultCountAreaOfGray = (areaOfGray - areaOfBlack) * 6;
-        resultCountAreaOfBlack = areaOfBlack * 10;
+            lowestX = findLowestX(grayPointsTable);
+            lowestY = findLowestY(grayPointsTable);
+            pushToTopRightPartOfCoordinateSystem(grayPointsTable, lowestX, lowestY);
+            highestX = findHighestX(grayPointsTable);
+            highestY = findHighestY(grayPointsTable);
+            checkingGray = true;
+            numOfPointsInsideGray = pointsInside(grayPointsTable, 0, highestX, 0, highestY);
+            checkingGray = false;
+            numOfBlackPoints = (blackPointsTable.length / 2) - 1;
+            numOfGrayPoints = (grayPointsTable.length / 2) - 1;
+            numOfBlackPoints += toAddBlackFromLines;
+            numOfGrayPoints += toAddGrayFromLines;
+            areaOfBlack = countArea(numOfPointsInsideBlack, numOfBlackPoints);
+            areaOfGray = countArea(numOfPointsInsideGray, numOfGrayPoints);
+            resultCountAreaOfGray = (areaOfGray - areaOfBlack) * 6;
+            resultCountAreaOfBlack = areaOfBlack * 10;
             /*System.out.println("result Area of gray = " + resultCountAreaOfGray);
             System.out.println("result Area of black = " + resultCountAreaOfBlack);
             System.out.println("num of black points = " + numOfBlackPoints);
@@ -68,12 +68,10 @@ public class BAJTELEK {
             System.out.println("area of black = " + areaOfBlack);
             System.out.println("area of gray = " + areaOfGray);*/
 
-        resultArea = (long) resultCountAreaOfBlack + (long) resultCountAreaOfGray;
-        System.out.println(resultArea);
+            resultArea = (long) resultCountAreaOfBlack + (long) resultCountAreaOfGray;
+            System.out.println(resultArea);
+        }
     }
-}
-
-
 
 
     private static double findAofLine(int y0, int y1, int x0, int x1) {
@@ -213,14 +211,12 @@ public class BAJTELEK {
             }
 
 
-
-
-                if (lineDirection[i].equals("E") || lineDirection[i].equals("W")){
-                    if (Math.abs(point0posX-point1PosX) > 1){
-                        if (checkingBlack) toAddBlackFromLines+=Math.abs(point0posX-point1PosX)-1;
-                        else if (checkingGray) toAddGrayFromLines+=Math.abs(point0posX-point1PosX)-1;
-                    }
+            if (lineDirection[i].equals("E") || lineDirection[i].equals("W")) {
+                if (Math.abs(point0posX - point1PosX) > 1) {
+                    if (checkingBlack) toAddBlackFromLines += Math.abs(point0posX - point1PosX) - 1;
+                    else if (checkingGray) toAddGrayFromLines += Math.abs(point0posX - point1PosX) - 1;
                 }
+            }
             // y = ax + b need
             if ((toPointY - fromPointY) > 1) {
                 if (isEndPoint || isStartPoint) {
@@ -228,25 +224,23 @@ public class BAJTELEK {
                     b = findBofLine(point0PosY, point0posX, a);
                     for (int j = fromPointY + 1; j < toPointY; j++) {
                         if (isStartPoint) {
-                            if (a != 0){
+                            if (a != 0) {
                                 startPointsTable[j][numOfStartPointsAtY[j]++] = findXofLine(j, a, b);
 
-                            }
-                            else{
+                            } else {
                                 startPointsTable[j][numOfStartPointsAtY[j]++] = point0posX;
                             }
-                            if ((startPointsTable[j][numOfStartPointsAtY[j]-1])%1 == 0){
+                            if ((startPointsTable[j][numOfStartPointsAtY[j] - 1]) % 1 == 0) {
                                 if (checkingGray) toAddGrayFromLines++;
                                 else if (checkingBlack) toAddBlackFromLines++;
                             }
                         } else {
                             if (a != 0) {
                                 endPointsTable[j][numOfEndPointsAtY[j]++] = findXofLine(j, a, b);
-                            }
-                            else {
+                            } else {
                                 endPointsTable[j][numOfEndPointsAtY[j]++] = point0posX;
                             }
-                            if ((endPointsTable[j][numOfEndPointsAtY[j]-1])%1 == 0){
+                            if ((endPointsTable[j][numOfEndPointsAtY[j] - 1]) % 1 == 0) {
                                 if (checkingGray) toAddGrayFromLines++;
                                 else if (checkingBlack) toAddBlackFromLines++;
                             }
@@ -333,27 +327,11 @@ public class BAJTELEK {
     }
 
     static int[] pointsTable(String inputNums) {
-        String incomingNumber = "";
-        int xyPoints;
-        int positionInTable = 0;
-        int counter = 0;
-        for (int i = 0; i < inputNums.length(); i++) {
-            if (inputNums.charAt(i) == ' ') counter++;
-        }
-        xyPoints = counter + 1;
-        int[] points = new int[xyPoints];
-        for (int j = 0; j < inputNums.length(); j++) {
-            if (inputNums.charAt(j) != ' ') {
-                incomingNumber += inputNums.charAt(j);
-            } else {
-                points[positionInTable] = Integer.parseInt(incomingNumber);
-                incomingNumber = "";
-                positionInTable++;
-            }
-            if (j == inputNums.length() - 1) {
-                points[positionInTable] = Integer.parseInt(incomingNumber);
-                incomingNumber = "";
-            }
+        String[] numbers = inputNums.split(" ");
+        int[] points = new int[numbers.length];
+        int i = 0;
+        for (String n : numbers) {
+            points[i++] = Integer.parseInt(n);
         }
         return points;
     }
