@@ -7,16 +7,25 @@ public class TPERM2 {
         int factorial = 1;
         char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
 
-        // a b c d e
-        // a b c e d
-        // a b e c d
-        // a e b c d
-        // b a c d e
-        // b a c e d
-        // b a e c d
-        // b e a c d
-        // c a b d e
-        // c a b e d
+        // a b c d
+        // a b d c
+        // a d b c
+        // a d c b
+        // a c b d
+        // a c d b
+        // b a c d
+        // b a d c
+        // b d a c
+        // b d c a
+        // b
+        // c a b d
+        // c a d b
+        // c d a b
+        // c d b a
+        // d a b c
+        // d a c b
+        // d c a b
+        // d c b a
 
 
         Scanner scanner = new Scanner(System.in);
