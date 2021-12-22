@@ -10,7 +10,6 @@ class Tester_Kodu {
 
     }
 }
-class Kot {
-    private String name;
-    private int age;
-}
+
+
+
