@@ -2,45 +2,33 @@
 import java.util.Scanner;
 
 public class TPERM2 {
+    static char[] perm = new char[11];
+    static int[] letters = new int[11];
     public static void main(String[] args) {
-        int tests, nums;
-        int factorial = 1;
-        char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'};
-
-        // a b c d
-        // a b d c
-        // a d b c
-        // a d c b
-        // a c b d
-        // a c d b
-        // b a c d
-        // b a d c
-        // b d a c
-        // b d c a
-        // b
-        // c a b d
-        // c a d b
-        // c d a b
-        // c d b a
-        // d a b c
-        // d a c b
-        // d c a b
-        // d c b a
-
-
+        int tests, num;
         Scanner scanner = new Scanner(System.in);
         tests = scanner.nextInt();
         scanner.nextLine();
-        for (int i = 0; i < tests; i++) {
-            nums = scanner.nextInt();
-            for (int j = 1; j <= nums; j++) {
-                factorial *= j;
+        for (int i = 0; i<tests;i++) {
+            num = scanner.nextInt();
+            scanner.nextLine();
+            generate(0,num);
+        }
+    }
+    static void generate(int pos, int n){
+        if (pos == n){
+            for (int i =0; i<n; i++){
+                System.out.print(perm[i]);
             }
-            for (int j = 0; j < factorial; j++) {
-
+            System.out.println();
+        }
+        for (int i =0; i<n;i++){
+            if (letters[i] == 0){
+                perm[pos] = (char)(i+'a');
+                letters[i] = 1;
+                generate(pos+1,n);
+                letters[i] = 0;
             }
-
-            factorial = 1;
         }
     }
 }
